@@ -16,3 +16,11 @@ export default {
   }
 }
 </script>
+
+<style>
+.home {
+  background: url('/assets/graphics/airbean-landing.svg');
+  background-color: black;
+  background-repeat: no-repeat;
+}
+</style>
