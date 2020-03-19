@@ -3,7 +3,7 @@
     <header class="main-header">
       <div class="header-icon-wrapper"> <figure class="navicon"> <img src="/assets/graphics/navicon.svg"> </figure> </div>
       <div class="header-icon-wrapper"> 
-        <figure class="carticon"> <img src="/assets/graphics/bag.svg"> </figure> 
+        <figure v-if="!view" class="carticon"> <img src="/assets/graphics/bag.svg"> </figure> 
       </div>
     </header>
     <main class="main-content">
@@ -57,7 +57,7 @@ body {
   background-repeat: no-repeat;
   background-color: #F3E4E1;
   border: solid black 1px;
-  height: 20%;
+  height: 15%;
   display: flex;
 }
 
@@ -77,8 +77,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px 0px 0px 10px;
-  position: fixed;
+  margin: 20px 0px 0px 20px;
 }
 
 .carticon {
@@ -91,8 +90,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px 0px 0px 120px;
-  position: fixed;
+  margin: 20px 0px 0px 120px;
 }
 
 
@@ -100,8 +98,9 @@ body {
   background: url('/assets/graphics/graphics-footer.svg');
   background-position: bottom;
   background-repeat: no-repeat;
+  background-color: #F3E4E1;
   border: solid red 1px;
-  min-height: 79%;
+  min-height: 84%;
   display: flex;
   flex-direction: column;
   align-items: center;
