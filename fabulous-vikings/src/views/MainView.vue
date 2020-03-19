@@ -2,7 +2,7 @@
   <div class="main-view">
     <header class="main-header">
       <div class="header-icon-wrapper"> <figure class="navicon"> <img src="/assets/graphics/navicon.svg"> </figure> </div>
-      <div class="header-icon-wrapper"> </div>
+      <div class="header-icon-wrapper"> <figure class="carticon"> <img src="/assets/graphics/bag.svg"> </figure> </div>
     </header>
     <main class="main-content">
       <div v-if="view"><p>About</p></div>
@@ -69,14 +69,30 @@ body {
   justify-content: center;
   align-items: center;
   margin: 10px 0px 0px 10px;
+  position: fixed;
 }
+
+.carticon {
+  height: 45px;
+  width: 45px;
+  padding: 0px;
+  margin: 0px;
+  border-radius: 50%;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0px 0px 120px;
+  position: fixed;
+}
+
 
 .main-content {
   background: url('/assets/graphics/graphics-footer.svg');
   background-position: bottom;
   background-repeat: no-repeat;
   border: solid red 1px;
-  height: 79%;
+  min-height: 79%;
 }
 
 .main-footer {
