@@ -2,11 +2,13 @@
   <div class="main-view">
     <header class="main-header">
       <div class="header-icon-wrapper"> <figure class="navicon"> <img src="/assets/graphics/navicon.svg"> </figure> </div>
-      <div class="header-icon-wrapper"> <figure class="carticon"> <img src="/assets/graphics/bag.svg"> </figure> </div>
+      <div class="header-icon-wrapper"> 
+        <figure class="carticon"> <img src="/assets/graphics/bag.svg"> </figure> 
+      </div>
     </header>
     <main class="main-content">
-      <div v-if="view"><p>About</p></div>
-      <div v-else><p>Menu</p></div>
+      <About v-if="view"/>
+      <Menu v-else/>
     </main>
     <footer class="main-footer">
 
@@ -15,7 +17,14 @@
 </template>
 
 <script>
+import about from '../components/About'
+import menu from '../components/Menu'
+
 export default {
+  components: {
+    About: about,
+    Menu: menu
+  },
   props: {
     view: Boolean
   },
@@ -93,6 +102,9 @@ body {
   background-repeat: no-repeat;
   border: solid red 1px;
   min-height: 79%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .main-footer {
