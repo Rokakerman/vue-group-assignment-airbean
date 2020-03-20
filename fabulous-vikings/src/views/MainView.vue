@@ -51,9 +51,11 @@ export default {
       return this.displayNav = false
     },
     displayMenu() {
+      this.$router.push('/menu')
       return this.closingNav()
     },
     displayAbout() {
+      this.$router.push('/about')
       return this.closingNav()
     }
   }
