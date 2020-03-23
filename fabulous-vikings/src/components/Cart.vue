@@ -54,7 +54,6 @@ export default {
   },
   methods: {
     qty(element, qty) {
-      //   console.log('button', element, qty)
       this.$store.dispatch('changeItemQty', {
         el: element,
         qty: qty
@@ -134,9 +133,13 @@ export default {
   transform: rotate(45deg);
   z-index: -1;
 }
+
 .cart {
-  overflow-y: hidden;
+  overflow-y: none;
   width: 21rem;
+}
+.cart:first-of-type {
+  overflow-y: auto;
 }
 .cart-item-cont {
   display: flex;

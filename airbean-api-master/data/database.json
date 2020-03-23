@@ -1,0 +1,21 @@
+{
+  "order": {
+    "UID": "user",
+    "orders": [
+      {
+        "orderNumber": "orderNr",
+        "timeStamp": "date",
+        "items": ["item", "item"],
+        "totalValue": "totalSumma"
+      }
+    ]
+  },
+  "user": [
+    {
+      "UID": "User",
+      "Name": "UserName",
+      "email": "UserEmail",
+      "gdpr": "gdpr"
+    }
+  ]
+}
