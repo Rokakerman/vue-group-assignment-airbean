@@ -1,23 +1,23 @@
 <template>
   <div class="main-view">
-    <Navigation 
-      v-on:closeNav="closingNav" 
-      v-on:showMenu="displayMenu" 
-      v-on:showAbout="displayAbout" 
+    <Navigation
+      v-on:closeNav="closingNav"
+      v-on:showMenu="displayMenu"
+      v-on:showAbout="displayAbout"
       v-if="displayNav == true"
     />
     <header class="main-header">
-      <div class="header-icon-wrapper"> 
-        <figure v-on:click="showNav" class="navicon"> 
-          <img src="/assets/graphics/navicon.svg"> 
-        </figure> 
+      <div class="header-icon-wrapper">
+        <figure v-on:click="showNav" class="navicon">
+          <img src="/assets/graphics/navicon.svg" />
+        </figure>
       </div>
-      <div class="header-icon-wrapper"> 
-        <figure v-if="!view" class="carticon"> <img src="/assets/graphics/bag.svg"> </figure> 
+      <div class="header-icon-wrapper">
+        <figure v-if="!view" class="carticon"><img src="/assets/graphics/bag.svg" /></figure>
       </div>
     </header>
     <main class="main-content">
-      <About v-if="view"/>
+      <About v-if="view" />
       <Menu v-else />
     </main>
     <footer class="main-footer"></footer>
@@ -40,15 +40,15 @@ export default {
   },
   data() {
     return {
-      displayNav: false,
+      displayNav: false
     }
   },
   methods: {
     showNav() {
-      return this.displayNav = true
+      return (this.displayNav = true)
     },
     closingNav() {
-      return this.displayNav = false
+      return (this.displayNav = false)
     },
     displayMenu() {
       this.$router.push('/menu')
@@ -121,7 +121,7 @@ body {
   background: url('/assets/graphics/graphics-footer.svg');
   background-position: bottom;
   background-repeat: no-repeat;
-  background-color: #F3E4E1;
+  background-color: #f3e4e1;
   background-size: contain;
   border: solid red 1px;
   min-height: 84%;

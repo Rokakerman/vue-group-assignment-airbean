@@ -29,6 +29,8 @@ export default {
   justify-content: space-between;
   align-items: center;
   margin: 0.8rem 0;
+  width: 100vw;
+  max-width: 50rem;
 }
 .inner-cont {
   display: flex;
@@ -36,7 +38,7 @@ export default {
   justify-content: center;
   align-items: flex-start;
   overflow-x: hidden;
-  max-width: 17rem;
+  max-width: 39rem;
 }
 
 h2,
@@ -48,7 +50,7 @@ p {
 }
 span {
   display: inline-block;
-  width: 200px;
+  width: 800px;
   height: 10px;
   background-image: linear-gradient(to right, black 20%, rgba(255, 255, 255, 0) 0%);
   background-position: bottom;
@@ -71,6 +73,7 @@ button {
   background-size: 55%;
   border: none;
   border-radius: 50%;
+  min-width: 2rem;
   width: 2rem;
   height: 2rem;
 }
