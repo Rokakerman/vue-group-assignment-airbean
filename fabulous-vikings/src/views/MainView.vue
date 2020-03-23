@@ -13,7 +13,9 @@
         </figure>
       </div>
       <div class="header-icon-wrapper">
-        <figure v-if="!view" class="carticon"><img src="/assets/graphics/bag.svg" /></figure>
+        <figure @click="$store.commit('showCart')" v-if="!view" class="carticon">
+          <img src="/assets/graphics/bag.svg" />
+        </figure>
       </div>
     </header>
     <main class="main-content">
