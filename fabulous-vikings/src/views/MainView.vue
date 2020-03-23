@@ -82,8 +82,7 @@ body {
   background-image: url('/assets/graphics/graphics-header2.svg');
   width: 100%;
   height: 100%;
-  /* top: -50%; */
-  /* left: -50%; */
+
   z-index: -1;
   content: '';
   transform: rotate(180deg);
