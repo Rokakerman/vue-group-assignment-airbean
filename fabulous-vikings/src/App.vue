@@ -6,12 +6,12 @@
 
 <style>
 :root {
-  --bean-brown: #2f2926;
-  --bean-darkgreen: #0e927d;
-  --bean-lightgreen: #58bf94;
-  --bean-pink: #f3e4e1;
-  --bean-orange: #e5674e;
-  --bean-black: #2f2926;
+  --bean-brown: #2F2926;
+  --bean-darkgreen: #0E927D;
+  --bean-lightgreen: #58BF94;
+  --bean-pink: #F3E4E1;
+  --bean-orange: #E5674E;
+  --bean-black: #2F2926;
 }
 
 body {
