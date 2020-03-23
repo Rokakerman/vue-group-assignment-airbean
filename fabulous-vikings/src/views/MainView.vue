@@ -7,15 +7,13 @@
       v-if="displayNav == true"
     />
     <header class="main-header">
-      <div class="header-icon-wrapper">
+      <div class="header-icon-wrapper-left">
         <figure v-on:click="showNav" class="navicon">
           <img src="/assets/graphics/navicon.svg" />
         </figure>
       </div>
-      <div class="header-icon-wrapper">
-        <figure @click="$store.commit('showCart')" v-if="!view" class="carticon">
-          <img src="/assets/graphics/bag.svg" />
-        </figure>
+      <div class="header-icon-wrapper-right">
+        <figure v-if="!view" class="carticon"><img src="/assets/graphics/bag.svg" /></figure>
       </div>
     </header>
     <main class="main-content">
@@ -87,7 +85,16 @@ body {
   display: flex;
 }
 
-.header-icon-wrapper {
+.header-icon-wrapper-left {
+  height: 100%;
+  width: 50%;
+  background: none;
+}
+
+.header-icon-wrapper-right {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap-reverse;
   height: 100%;
   width: 50%;
   background: none;
@@ -116,7 +123,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0px 0px 120px;
+  margin: 20px 20px 0px 0px;
 }
 
 .main-content {
