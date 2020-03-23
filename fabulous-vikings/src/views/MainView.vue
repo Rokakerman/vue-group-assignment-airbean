@@ -90,7 +90,6 @@ body {
   background-position: bottom;
   background-repeat: no-repeat;
   background-size: auto 800px;
-  /* background-size: contain; */
   background-color: var(--bean-pink);
 }
 .main-header {
