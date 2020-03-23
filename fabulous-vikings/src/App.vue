@@ -33,7 +33,8 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+button {
   font-family: 'PT Serif', serif;
   font-weight: bold;
 }

@@ -41,7 +41,7 @@ export default {}
 }
 .about-title {
   text-align: start;
-  font-size: 38px;
+  /* font-size: 38px; */
 }
 
 .strong-bread {

@@ -1,9 +1,13 @@
 <template>
   <div class="main-view">
     <header class="main-header">
-      <div class="header-icon-wrapper"> <figure class="navicon"> <img src="/assets/graphics/navicon.svg"> </figure> </div>
-      <div class="header-icon-wrapper"> 
-        <figure v-if="!view" class="carticon"> <img src="/assets/graphics/bag.svg"> </figure> 
+      <div class="header-icon-wrapper">
+        <figure class="navicon"><img src="/assets/graphics/navicon.svg" /></figure>
+      </div>
+      <div class="header-icon-wrapper">
+        <button @click="$store.commit('showCart')" v-if="!view" class="carticon">
+          <img src="/assets/graphics/bag.svg" />
+        </button>
       </div>
     </header>
     <main class="main-content">
@@ -91,7 +95,7 @@ body {
   background: url('/assets/graphics/graphics-footer.svg');
   background-position: bottom;
   background-repeat: no-repeat;
-  background-color: #F3E4E1;
+  background-color: #f3e4e1;
   border: solid red 1px;
   min-height: 84%;
   display: flex;
