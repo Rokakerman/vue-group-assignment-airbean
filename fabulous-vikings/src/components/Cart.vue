@@ -7,7 +7,7 @@
       <section class="cart-inner">
         <div class="tip"></div>
         <h1>Din Beställning</h1>
-        <div class="cart" v-if="$store.state.cart.length">
+        <div class="cart cart--top" v-if="$store.state.cart.length">
           <div class="cart-item-cont" v-for="(el, index) in $store.state.cart" :key="index">
             <div class="cart-item cart-item--left">
               <h2>{{ el.title }}<span></span></h2>
@@ -85,7 +85,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .modal {
   position: fixed;
   color: white;
@@ -135,12 +135,30 @@ export default {
 }
 
 .cart {
-  overflow-y: none;
+  /* overflow-y: auto; */
+  /* background-color: blueviolet; */
   width: 21rem;
 }
-.cart:first-of-type {
+.cart--top {
   overflow-y: auto;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #ebebeb;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  background: rgba(47, 41, 38, 0.541);
+}
+
 .cart-item-cont {
   display: flex;
   flex-direction: row;
