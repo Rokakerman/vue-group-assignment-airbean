@@ -158,7 +158,7 @@ body {
   background-image: url('/assets/graphics/graphics-footer2.svg');
   background-position: bottom;
   background-repeat: no-repeat;
-  background-color: #f3e4e1;
+  background-color: var(--bean-pink);
   background-size: auto 800px;
   border: solid red 1px;
   min-height: 84%;

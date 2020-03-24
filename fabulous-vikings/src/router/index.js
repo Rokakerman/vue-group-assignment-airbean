@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import MainView from '../views/MainView.vue'
+import ProfileView from '../views/Profile.vue'
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,18 @@ const routes = [
     name: 'Menu',
     component: MainView,
     props: { view: false }
+  },
+  {
+    path: '/sign',
+    name: 'SignUp',
+    component: ProfileView,
+    props: { view: false }
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: ProfileView,
+    props: { view: true }
   }
 ]
 
