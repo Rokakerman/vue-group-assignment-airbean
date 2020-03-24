@@ -1,8 +1,10 @@
 <template>
   <section class="modal">
-    <button @click="$store.commit('showCart')" class="carticon">
-      <img src="/assets/graphics/bag.svg" />
-    </button>
+    <div class="header">
+      <figure @click="$store.commit('showCart')" class="carticon">
+        <img src="/assets/graphics/bag.svg" />
+      </figure>
+    </div>
     <section class="cart-outer">
       <section class="cart-inner">
         <div class="tip"></div>
@@ -95,6 +97,11 @@ export default {
   top: 0;
   background: rgba(0, 0, 0, 0.61);
 }
+.header {
+  display: flex;
+  justify-content: flex-end;
+  height: 5rem;
+}
 
 .cart-outer {
   display: flex;
@@ -105,7 +112,7 @@ export default {
 .cart-inner {
   font-size: 1rem;
   position: relative;
-  max-height: 90vh;
+  max-height: 80vh;
   width: 90vw;
   max-width: 30rem;
   color: var(--bean-black);
@@ -125,7 +132,7 @@ export default {
 .tip {
   position: absolute;
   border-radius: 2px;
-  right: 1rem;
+  right: 1.3rem;
   top: -0.2rem;
   width: 20px;
   height: 20px;
@@ -135,8 +142,6 @@ export default {
 }
 
 .cart {
-  /* overflow-y: auto; */
-  /* background-color: blueviolet; */
   width: 21rem;
 }
 .cart--top {
@@ -170,7 +175,6 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  /* border: 1px solid var(--bean-black); */
   overflow: hidden;
 }
 .cart-item--left {
@@ -193,7 +197,6 @@ export default {
   margin-block-end: 0.3rem;
 }
 .cart-item--right p {
-  /* font-size: 0.9rem; */
   font-weight: 600;
   margin-block-start: 0.3rem;
   margin-block-end: 0.3rem;
@@ -246,20 +249,14 @@ span {
 }
 
 .cart-total--left {
-  /* width: 13rem; */
   align-items: flex-start;
 }
 .cart-total--right {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  /* border: 1px solid var(--bean-black); */
-  /* overflow: hidden; */
-  /* width: 8rem; */
   text-align: right;
-
   white-space: nowrap;
-  /* align-items: flex-start; */
 }
 .cart-total--right h1 {
   margin-block-start: 0.7rem;
@@ -269,14 +266,7 @@ span {
   margin-block-start: 0.1rem;
   margin-block-end: 0.3rem;
 }
-/* .cart-total--right h1 {
-  margin-block-start: 0.1rem;
-  margin-block-end: 0.3rem;
-} */
 
-/* .cart-item-qty {
-  overflow-y: hidden;
-} */
 .fade-enter-active,
 .fade-leave-active {
   transition: all 0.2s ease;
@@ -298,6 +288,12 @@ span {
   color: white;
   background-color: var(--bean-black);
   /* outline: none; */
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
+}
+
+@media screen and (min-width: 500px) {
+  .tip {
+    visibility: hidden;
+  }
 }
 </style>
