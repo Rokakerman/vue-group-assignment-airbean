@@ -4,7 +4,12 @@
       v-on:closeNav="closingNav"
       v-on:showMenu="displayMenu"
       v-on:showAbout="displayAbout"
+      v-on:showOrderStatus="orderStatus"
       v-if="displayNav == true"
+    />
+    <Order 
+      v-if="displayOrderStatus === true"
+      v-on:closeOrderStatus="shutDownStatus"
     />
     <header class="main-header">
       <div class="header-icon-wrapper-left">
@@ -28,19 +33,22 @@
 import about from '../components/About'
 import menu from '../components/Menu'
 import navigation from '../components/Navigation'
+import orderstatus from '../components/OrderStatus'
 
 export default {
   components: {
     About: about,
     Menu: menu,
-    Navigation: navigation
+    Navigation: navigation,
+    Order: orderstatus
   },
   props: {
     view: Boolean
   },
   data() {
     return {
-      displayNav: false
+      displayNav: false,
+      displayOrderStatus: false
     }
   },
   methods: {
@@ -57,6 +65,12 @@ export default {
     displayAbout() {
       this.$router.push('/about')
       return this.closingNav()
+    },
+    orderStatus() {
+      this.displayOrderStatus = true;
+    },
+    shutDownStatus() {
+      return this.displayOrderStatus = false;
     }
   }
 }

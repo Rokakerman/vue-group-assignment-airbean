@@ -9,7 +9,10 @@
             <article class="nav-option-container">
                 <h1 class="nav-option" v-on:click="showMenu"> Meny </h1>
                 <h1 class="nav-option" v-on:click="showAbout"> Vårt Kaffe </h1>
-                <h1 class="nav-option"> Orderstatus </h1>
+                <h1 class="nav-option" 
+                    v-on:click="showOrderStatus"
+                > Orderstatus 
+                </h1>
             </article>
         </main>
         <footer class="nav-footer"></footer>
@@ -32,6 +35,9 @@ export default {
         },
         showAbout() {
             return this.$emit('showAbout')
+        },
+        showOrderStatus() {
+            return this.$emit('showOrderStatus')
         }
     }
 
@@ -44,7 +50,7 @@ export default {
     position: fixed;
     width: 100%;
     height: 100%;
-    z-index: 4;
+    z-index: 1;
 }
 
 .nav-header {
