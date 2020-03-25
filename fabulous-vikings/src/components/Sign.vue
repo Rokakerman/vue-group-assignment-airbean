@@ -1,7 +1,7 @@
 <template>
     <div class="sign-body">
         <header class="sign-header">
-            <figure v-on:click="showNav" class="sign-icon">
+            <figure class="sign-icon">
                 <img class="letter-a" src="../assets/graphics/a.svg" />
             </figure>
             <h1 class="sign-title"> Välkommen till Airbean-familjen! </h1>
@@ -36,7 +36,11 @@ export default {
     },
     methods: {
         validation() {
-
+            if(this.UserName.length > 0 && this.UserEmail.includes('@') == true && this.toggle == true) {
+                return console.log('valid')
+            } else {
+                return console.log('not valid')
+            }
         }
     }
 }
@@ -45,7 +49,7 @@ export default {
 <style>
 .sign-body {
     position: fixed;
-    width: 90%;
+    max-width: 90%;
     height: 80%;
     background-color: var(--bean-pink);
     display: flex;
@@ -78,10 +82,12 @@ export default {
 .sign-title {
     margin: 0px;
     margin-top: 30px;
+    width: 90%;
 }
 
 .sign-bread {
-    margin: 0px 0px 0px 0px;
+    margin: 10px 0px 0px 0px;
+    max-width: 90%;
 }
 
 .sign-main {
