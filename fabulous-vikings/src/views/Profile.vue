@@ -7,6 +7,10 @@
             v-on:showOrderStatus="orderStatus"
             v-if="displayNav == true"
         />
+        <Order
+            v-if="displayOrderStatus === true"
+            v-on:closeOrderStatus="shutDownStatus"
+        />
         <header class="profile-header">
             <div class="header-icon-wrapper-left">
                 <figure v-on:click="showNav" class="navicon">
@@ -14,21 +18,29 @@
                 </figure>
             </div>
         </header>
-        <main class="profile-main"></main>
+        <main class="profile-main">
+            <div v-if="view" />
+            <SignUp v-else />
+        </main>
         <footer class="profile-footer"></footer>
     </div>
 </template>
 
 <script>
 import navigation from '../components/Navigation'
+import orderstatus from '../components/OrderStatus'
+import sign from '../components/Sign'
 
 export default {
     components: {
-        Navigation: navigation
+        Navigation: navigation,
+        Order: orderstatus,
+        SignUp: sign
     },
     data() {
         return {
-            displayNav: false
+            displayNav: false,
+            displayOrderStatus: false
         }
     },
     props: {
@@ -56,7 +68,10 @@ export default {
             return this.$router.push('/about')
         },
         orderStatus() {
-
+            return this.displayOrderStatus = true
+        },
+        shutDownStatus() {
+            return this.displayOrderStatus = false
         }
     }
 }
@@ -85,7 +100,7 @@ export default {
 .profile-header {
   position: relative;
   overflow: hidden;
-  border: solid black 1px;
+  border: none;
   height: 15%;
   display: flex;
 }
@@ -93,6 +108,8 @@ export default {
 .profile-main {
     background-color: var(--bean-brown);
     height: 85%;
+    display: flex;
+    justify-content: center;
 }
 
 </style>

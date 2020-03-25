@@ -108,7 +108,7 @@ body {
 .main-header {
   position: relative;
   overflow: hidden;
-  border: solid black 1px;
+  border: none;
   height: 15%;
   display: flex;
 }
@@ -139,6 +139,7 @@ body {
   justify-content: center;
   align-items: center;
   margin: 20px 0px 0px 20px;
+  cursor: pointer;
 }
 
 .carticon {
@@ -152,6 +153,7 @@ body {
   justify-content: center;
   align-items: center;
   margin: 20px 20px 0px 0px;
+  cursor: pointer;
 }
 
 .main-content {
@@ -160,8 +162,7 @@ body {
   background-repeat: no-repeat;
   background-color: var(--bean-pink);
   background-size: auto 800px;
-  border: solid red 1px;
-  min-height: 84%;
+  min-height: 85%;
   display: flex;
   flex-direction: column;
   align-items: center;

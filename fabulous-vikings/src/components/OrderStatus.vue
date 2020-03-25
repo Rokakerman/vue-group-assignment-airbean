@@ -123,5 +123,6 @@ export default {
     border: none;
     border-radius: 30px 30px 30px 30px;
     font-size: 24px;
+    cursor: pointer;
 }
 </style>

@@ -13,6 +13,7 @@
                     v-on:click="showOrderStatus"
                 > Orderstatus 
                 </h1>
+                <h1 class="nav-option" v-on:click="showProfile"> Profil </h1>
             </article>
         </main>
         <footer class="nav-footer"></footer>
@@ -38,6 +39,13 @@ export default {
         },
         showOrderStatus() {
             return this.$emit('showOrderStatus')
+        },
+        showProfile() {
+            /*if('user exists') {
+               return this.$router.push('/profile')
+            }
+            else {}*/
+            return this.$router.push('/sign')
         }
     }
 
@@ -66,6 +74,7 @@ export default {
     justify-content: center;
     align-items: center;
     margin: 20px 0px 0px 20px;
+    cursor: pointer;
 }
 
 .close-icon {
@@ -93,5 +102,6 @@ export default {
     color: white;
     margin-bottom: 0px;
     font-size: 40px;
+    cursor: pointer;
 }
 </style>
