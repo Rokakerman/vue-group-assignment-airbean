@@ -15,8 +15,8 @@
             <label class="sign-label"> Epost </label>
             <input type="text" v-model="UserEmail" class="sign-input"  placeholder="This Email!"/>
             <label class="gdpr"> 
-                <input type="checkbox" id="checkbox" v-model="toggle" class="gdpr-checkmark"/>
-                <p class="gdpr-bread"> GPDPR Ok! {{ toggle }} </p>
+                <input type="checkbox" id="checkbox" v-model="gdprOk" class="gdpr-checkmark"/>
+                <p class="gdpr-bread"> GPDPR Ok! {{ gdprOk }} </p>
             </label>
         </main>
         <footer class="sign-footer">
@@ -31,13 +31,19 @@ export default {
         return {
             UserName: '',
             UserEmail: '',
-            toggle: false
+            gdprOk: false
         }
     },
     methods: {
         validation() {
-            if(this.UserName.length > 0 && this.UserEmail.includes('@') == true && this.toggle == true) {
-                return console.log('valid')
+            if(this.UserName.length > 0 && this.UserEmail.includes('@') == true && this.gdprOk == true) {
+                let obj = {
+                    userName: this.UserName,
+                    userEmail: this.UserEmail,
+                    gpdr: this.gdprOk
+                }
+
+                return console.log('valid', obj)
             } else {
                 return console.log('not valid')
             }
