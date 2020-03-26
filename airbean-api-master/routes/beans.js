@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-  console.log('req', req.body)
+  // console.log('req', req.body)
   if (
     !Object.prototype.hasOwnProperty.call(req.body, 'items') ||
     !req.body.items.length
@@ -56,6 +56,18 @@ router.get('/key', (req, res) => {
   const key = {
     key: uuid()
   }
+  res.send(JSON.stringify(key))
+})
+
+router.post('/orderhistory', (req, res) => {
+  req.body.uuid
+  if (
+    !Object.prototype.hasOwnProperty.call(req.body, 'uuid') ||
+    !req.body.uuid.length
+  ) {
+    return res.send({ status: 400, message: 'Bad request. Missing uuid' })
+  }
+
   res.send(JSON.stringify(key))
 })
 
