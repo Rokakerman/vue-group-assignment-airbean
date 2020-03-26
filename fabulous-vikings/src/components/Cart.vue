@@ -41,7 +41,7 @@
             </div>
           </div>
           <p>inkl moms + drönarleverans</p>
-          <button class="checkout-btn" @click="sendOrder">Take my money!</button>
+          <button class="checkout-btn" @click="sendOrder, showOrder">Take my money!</button>
         </div>
       </section>
     </section>
@@ -64,7 +64,11 @@ export default {
     },
     sendOrder() {
       this.$store.dispatch('sendOrder')
+    },
+    showOrder() {
+      this.$emit('showMyOrder')
     }
+
   },
   computed: {
     cartTotal() {
