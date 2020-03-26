@@ -172,6 +172,7 @@ body {
   align-items: center;
   margin: 20px 20px 0px 0px;
   cursor: pointer;
+  position: relative;
 }
 
 .cart-count {
@@ -183,9 +184,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0px 0px 30px 20px;
   color: white;
   font-size: 13px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
 }
 
 .main-content {

@@ -24,6 +24,7 @@
 
 <script>
 export default {
+    // I orderstaus ska hämta data från store
     data() {
         return {
            orderNumber: 3494
