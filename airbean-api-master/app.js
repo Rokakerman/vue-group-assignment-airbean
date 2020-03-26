@@ -5,12 +5,12 @@ const app = express()
 const beansRouter = require('./routes/beans')
 const PORT = 5000
 
+const bodyParser = require('body-parser')
 
 app.use(cors())
-app.use(express.json())
+// app.use(express.json())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use('/api/beans', beansRouter)
 
-
 app.listen(5000, () => console.log(`Server started on port ${PORT}`))
-
-
