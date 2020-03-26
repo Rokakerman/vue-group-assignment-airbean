@@ -3,6 +3,7 @@
     <div class="header">
       <figure @click="$store.commit('showCart')" class="carticon">
         <img src="/assets/graphics/bag.svg" />
+        <div class="cart-count"> <p> {{cartCount}} </p> </div>
       </figure>
     </div>
     <section class="cart-outer">
@@ -71,6 +72,9 @@ export default {
     },
     total() {
       return this.cartTotal[1]
+    },
+    cartCount() {
+      return this.$store.getters.cartTotal[0];
     },
     animatedTotal: function() {
       return this.tweenedTotal ? this.tweenedTotal.toFixed(0) : this.tweenedTotal
