@@ -27,9 +27,9 @@
           </div>
         </div>
         <div v-else>
-          Your Cart is empty
+          -- Din varukorg är tom --
         </div>
-        <div class="cart">
+        <div class="cart" v-if="$store.state.cart.length">
           <div class="cart-total-cont">
             <div class="cart-item cart-total--left">
               <h1>Total<span></span></h1>
@@ -41,7 +41,12 @@
             </div>
           </div>
           <p>inkl moms + drönarleverans</p>
-          <button class="checkout-btn" @click="sendOrder">Take my money!</button>
+          <div v-if="error">
+            <h2>Error:</h2>
+            <p>{{ error }}</p>
+          </div>
+          <button v-else-if="!loading" class="checkout-btn" @click="sendOrder">Take my money!</button>
+          <h2 v-else>Sending order...</h2>
         </div>
       </section>
     </section>
@@ -52,7 +57,9 @@
 export default {
   data: () => {
     return {
-      tweenedTotal: 0
+      tweenedTotal: 0,
+      error: '',
+      loading: false
     }
   },
   methods: {
@@ -62,8 +69,14 @@ export default {
         qty: qty
       })
     },
-    sendOrder() {
-      this.$store.dispatch('sendOrder')
+    async sendOrder() {
+      this.loading = true
+      try {
+        await this.$store.dispatch('sendOrder')
+      } catch (e) {
+        this.error = e.status + ' - ' + e.message
+      }
+      this.loading = false
     }
   },
   computed: {
@@ -122,7 +135,7 @@ export default {
   color: var(--bean-black);
   background-color: white;
   border-radius: 5px;
-  padding: 0 0.5rem;
+  padding: 0 0.5rem 2rem 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -292,7 +305,7 @@ span {
   color: white;
   background-color: var(--bean-black);
   /* outline: none; */
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
 }
 
 @media screen and (min-width: 500px) {

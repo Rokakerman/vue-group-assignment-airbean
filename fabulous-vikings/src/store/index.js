@@ -7,7 +7,13 @@ export default new Vuex.Store({
   state: {
     menu: [],
     cart: JSON.parse(window.localStorage.getItem('cart')) ? JSON.parse(window.localStorage.getItem('cart')) : [],
-    showCart: false
+    showCart: false,
+    UUID: JSON.parse(window.localStorage.getItem('UUID')) ? JSON.parse(window.localStorage.getItem('UUID')) : '',
+    userRegistered: JSON.parse(window.localStorage.getItem('userRegistered'))
+      ? JSON.parse(window.localStorage.getItem('userRegistered'))
+      : false,
+    newOrder: { orderNr: '', eta: 0 },
+    orderHistory: { list: [], total: 0 }
   },
   getters: {
     cartTotal(state) {
@@ -46,6 +52,20 @@ export default new Vuex.Store({
         if (state.cart[id].qty <= 0) state.cart.splice(id, 1)
         window.localStorage.setItem('cart', JSON.stringify(state.cart))
       }
+    },
+    newOrder(state, apiRes) {
+      if (!state.UUID) {
+        state.UUID = apiRes.UUID
+        window.localStorage.setItem('UUID', JSON.stringify(state.UUID))
+      }
+      if (!state.userRegistered && apiRes.userRegistered) {
+        state.userRegistered = true
+        window.localStorage.setItem('userRegistered', JSON.stringify(true))
+      }
+      state.newOrder.orderNr = apiRes.orderNr
+      state.newOrder.eta = apiRes.eta
+      state.cart = []
+      window.localStorage.setItem('cart', JSON.stringify(state.cart))
     }
   },
   actions: {
@@ -57,8 +77,20 @@ export default new Vuex.Store({
           .then(res => JSON.parse(JSON.stringify(res.menu)))
       )
     },
-    sendOrder() {
-      console.log('dispatch sendOrder')
+    async sendOrder({ commit, state }) {
+      // console.log('dispatch sendOrder')
+      const result = await fetch('http://localhost:5000/api/beans/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify({ UUID: state.UUID, items: state.cart })
+      })
+        .then(data => data.json())
+        .then(res => JSON.parse(JSON.stringify(res)))
+      // console.log('fetchresult', result)
+      if (result.status === 200) commit('newOrder', result)
+      else throw { status: result.status, message: result.message }
     },
     addToCart(ctx, item) {
       ctx.commit('addToCart', item)
