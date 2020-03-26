@@ -20,6 +20,7 @@
       <div class="header-icon-wrapper-right">
         <figure @click="$store.commit('showCart')" v-if="!view" class="carticon">
           <img src="/assets/graphics/bag.svg" />
+          <div class="cart-count"> <p> {{cartCount}} </p> </div>
         </figure>
       </div>
     </header>
@@ -51,6 +52,11 @@ export default {
     return {
       displayNav: false,
       displayOrderStatus: false
+    }
+  },
+  computed: {
+    cartCount() {
+      return this.$store.getters.cartTotal[0];
     }
   },
   methods: {
@@ -154,6 +160,20 @@ body {
   align-items: center;
   margin: 20px 20px 0px 0px;
   cursor: pointer;
+}
+
+.cart-count {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--bean-orange);
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 0px 30px 20px;
+  color: white;
+  font-size: 13px;
 }
 
 .main-content {
