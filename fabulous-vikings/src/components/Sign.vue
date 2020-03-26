@@ -16,7 +16,7 @@
             <input type="text" v-model="UserEmail" class="sign-input"  placeholder="This Email!"/>
             <label class="gdpr"> 
                 <input type="checkbox" id="checkbox" v-model="gdprOk" class="gdpr-checkmark"/>
-                <p class="gdpr-bread"> GPDPR Ok! {{ gdprOk }} </p>
+                <p class="gdpr-bread"> GPDPR Ok! </p>
             </label>
         </main>
         <footer class="sign-footer">
