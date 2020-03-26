@@ -67,12 +67,24 @@ export default {
       return (this.displayNav = false)
     },
     displayMenu() {
-      this.$router.push('/menu')
-      return this.closingNav()
+      if(this.$router == '/menu') {
+        console.log('not pushing')
+        return this.closingNav()
+      }
+      else {
+        this.$router.push('/menu')
+        return this.closingNav()
+      }
     },
     displayAbout() {
-      this.$router.push('/about')
-      return this.closingNav()
+      if(this.$router == '/about') {
+        console.log('not pushing')
+        return this.closingNav()
+      }
+      else {
+        this.$router.push('/about')
+        return this.closingNav()
+      }
     },
     orderStatus() {
       this.displayOrderStatus = true;
