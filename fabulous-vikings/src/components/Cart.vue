@@ -3,12 +3,9 @@
     <div class="header">
       <figure @click="$store.commit('showCart')" class="carticon">
         <img src="/assets/graphics/bag.svg" />
-<<<<<<< Updated upstream
-=======
         <div class="cart-count">
           <p>{{ cartCount }}</p>
         </div>
->>>>>>> Stashed changes
       </figure>
     </div>
     <section class="cart-outer">
@@ -94,12 +91,9 @@ export default {
     total() {
       return this.cartTotal[1]
     },
-<<<<<<< Updated upstream
-=======
     cartCount() {
       return this.$store.getters.cartTotal[0]
     },
->>>>>>> Stashed changes
     animatedTotal: function() {
       return this.tweenedTotal ? this.tweenedTotal.toFixed(0) : this.tweenedTotal
     }
