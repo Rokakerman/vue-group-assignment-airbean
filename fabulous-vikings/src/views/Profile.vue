@@ -13,7 +13,7 @@
       </div>
     </header>
     <main class="profile-main">
-      <div v-if="view" />
+      <User v-if="view" />
       <SignUp v-else />
     </main>
     <footer class="profile-footer"></footer>
@@ -24,12 +24,14 @@
 import navigation from '../components/Navigation'
 // import orderstatus from '../components/OrderStatus'
 import sign from '../components/Sign'
+import userProfile from '../components/UserProfile'
 
 export default {
   components: {
     Navigation: navigation,
     // Order: orderstatus,
-    SignUp: sign
+    SignUp: sign,
+    User: userProfile
   },
   data() {
     return {

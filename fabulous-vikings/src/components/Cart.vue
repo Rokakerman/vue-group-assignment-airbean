@@ -96,6 +96,7 @@ export default {
         console.log('error', e.message)
       }
     }
+
   },
   computed: {
     cartTotal() {
