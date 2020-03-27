@@ -8,32 +8,56 @@
         <main class="user-main">
             <h1 class="user-order-title"> Orderhistorik </h1>
             <ul class="order-history">
-                <li class="order">
+                <li v-for="order in history" v-bind:key="order.orderNr" class="order">
                     <div class="order-top-display">
-                        <p class="product-id"> #F566GBF78 </p>
+                        <p class="product-id"> {{order.orderNr}} </p>
                         <p class="purchase-date"> 20/04/12 </p>
                     </div>
                     <div class="order-bottom-display">
                         <p class="product-flavout-text"> Total ordersumma </p>
-                        <p class="product-sum-total"> 98kr </p>
+                        <p class="product-sum-total"> {{order.total}} </p>
                     </div>
-                    <hr>
+                    <hr class="product-line">
                 </li>
             </ul>
+            <hr class="product-list-footer">
         </main>
-        <footer class="user-footer"></footer>
+        <footer class="user-footer">
+            <p class="total-spent"> Totalt spenderat </p>
+            <p class="total-sum"> {{total}} </p>
+        </footer>
     </div>
 </template>
 
 <script>
 export default {
-// 
+    created() {
+        this.orderHistory()
+    },
+    methods: {
+        async orderHistory() {
+            try {
+                await this.$store.dispatch('loadOrderHistory')
+            } catch (e) {
+                console.log('error', e.message)
+            }
+        }
+    },
+    computed: {
+        history() {
+            return this.$store.state.orderHistory.list
+        },
+        total() {
+            return this.$store.state.orderHistory.total
+        }
+    }
 }
 </script>
 
 <style>
 .user-body {
     width: 90%;
+    max-width: 700px;
 }
 
 .user-header {
@@ -83,6 +107,8 @@ export default {
     list-style: none;
     margin-bottom: 0px;
     width: 100%;
+    overflow-y: scroll;
+    scrollbar-width: thin;
 }
 
 .order-top-display {
@@ -94,10 +120,12 @@ export default {
 
 .product-id {
     margin: 0px;
+    opacity: 80%;
 }
 
 .purchase-date {
     margin: 0px;
+    opacity: 60%;
 }
 
 .order-bottom-display {
@@ -108,13 +136,32 @@ export default {
 
 .product-flavout-text {
     margin: 0px;
+    opacity: 60%;
 }
 
 .product-sum-total {
     margin: 0px;
+    opacity: 60%;
+}
+
+.product-line {
+    opacity: 60%;
 }
 
 .user-footer {
     height: 20%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+}
+
+.product-list-footer {
+    width: 100%;
+    margin-top: auto;
+    border: none;
+    height: 1px;
+    margin: 0px;
+    background-color: white;
 }
 </style>

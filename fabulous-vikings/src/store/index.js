@@ -82,12 +82,12 @@ export default new Vuex.Store({
       state.cart = []
       window.localStorage.setItem('cart', JSON.stringify(state.cart))
     },
-    saveUser({ userData }, resApi) {
-      if (!userData.UUID) {
-        userData.UUID = resApi.UUID
+    saveUser(state, resApi) {
+      if (state.userData.UUID == null || !state.userData.UUID) {
+        state.userData.UUID = resApi.UUID
         window.localStorage.setItem('UUID', JSON.stringify(resApi.UUID))
       }
-      userData.userRegistered = true
+      state.userData.userRegistered = true
       window.localStorage.setItem('userRegistered', JSON.stringify(true))
       // userData.userName = resApi.userName
       window.localStorage.setItem('userName', JSON.stringify(resApi.userName))

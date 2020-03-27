@@ -72,19 +72,25 @@ router.post('/signin', (req, res) => {
     return res.send({ status: 400, message: 'Bad request. Missing userEmail' })
 
   const user = {
-    uuid: '',
+    UUID: '',
     userName: '',
     userEmail: '',
     gdpr: 0,
     status: 200
   }
-
+  console.log(req.body.UUID)
   if (
     !Object.prototype.hasOwnProperty.call(req.body, 'UUID') ||
     !req.body.UUID.length
-  )
-    user.uuid = uuid()
-  else user.uuid = req.body.UUID
+    || 
+    req.body.UUID != null
+  ) 
+  {
+    user.UUID = uuid()
+  }
+  else {
+    user.UUID  = req.body.UUID
+  }
 
   user.userName = req.body.userName
   user.userEmail = req.body.userEmail

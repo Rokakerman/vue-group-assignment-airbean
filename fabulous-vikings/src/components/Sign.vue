@@ -35,14 +35,19 @@ export default {
     }
   },
   methods: {
-    validation() {
+    async validation() {
       if (this.UserName.length > 0 && this.UserEmail.includes('@') == true && this.gdprOk == true) {
         let obj = {
           userName: this.UserName,
           userEmail: this.UserEmail,
           gpdr: this.gdprOk
         }
-
+        this.$store.commit('setUserData', obj)
+        try {
+        await this.$store.dispatch('signIn')
+        } catch (e) {
+        console.log('error', e.message)
+        }
         return console.log('valid', obj)
       } else {
         return console.log('not valid')
