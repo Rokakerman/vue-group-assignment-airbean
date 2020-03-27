@@ -24,6 +24,7 @@
 import navigation from '../components/Navigation'
 // import orderstatus from '../components/OrderStatus'
 import sign from '../components/Sign'
+import userProfile from '../components/UserProfile'
 
 export default {
   components: {

@@ -1,10 +1,16 @@
 <template>
   <div class="main-view">
-    <Navigation v-on:closeNav="closingNav" v-if="displayNav == true" />
-    <!-- v-on:showMenu="displayMenu" -->
-    <!-- v-on:showAbout="displayAbout" -->
-    <!-- v-on:showOrderStatus="orderStatus" -->
-    <!-- <Order v-if="displayOrderStatus === true" v-on:closeOrderStatus="shutDownStatus" /> -->
+    <Navigation
+      v-on:closeNav="closingNav"
+      v-on:showMenu="displayMenu"
+      v-on:showAbout="displayAbout"
+      v-on:showOrderStatus="orderStatus"
+      v-if="displayNav == true"
+    />
+    <Order 
+      v-if="displayOrderStatus === true"
+      v-on:closeOrderStatus="shutDownStatus"
+    />
     <header class="main-header">
       <div class="header-icon-wrapper-left">
         <figure v-on:click="showNav" class="navicon">
@@ -14,9 +20,7 @@
       <div class="header-icon-wrapper-right">
         <figure @click="$store.commit('showCart')" v-if="!view" class="carticon">
           <img src="/assets/graphics/bag.svg" />
-          <div class="cart-count">
-            <p>{{ cartCount }}</p>
-          </div>
+          <div class="cart-count"> <p> {{cartCount}} </p> </div>
         </figure>
       </div>
     </header>
@@ -32,25 +36,27 @@
 import about from '../components/About'
 import menu from '../components/Menu'
 import navigation from '../components/Navigation'
-// import orderstatus from '../components/OrderStatus'
+import orderstatus from '../components/OrderStatus'
 
 export default {
   components: {
     About: about,
     Menu: menu,
-    Navigation: navigation
+    Navigation: navigation,
+    Order: orderstatus
   },
   props: {
     view: Boolean
   },
   data() {
     return {
-      displayNav: false
+      displayNav: false,
+      displayOrderStatus: false
     }
   },
   computed: {
     cartCount() {
-      return this.$store.getters.cartTotal[0]
+      return this.$store.getters.cartTotal[0];
     }
   },
   methods: {
@@ -58,15 +64,33 @@ export default {
       return (this.displayNav = true)
     },
     closingNav() {
-      this.displayNav = false
+      return (this.displayNav = false)
     },
     displayMenu() {
-      this.$router.push('/menu')
-      return this.closingNav()
+      if(this.$router == '/menu') {
+        console.log('not pushing')
+        return this.closingNav()
+      }
+      else {
+        this.$router.push('/menu')
+        return this.closingNav()
+      }
     },
     displayAbout() {
-      this.$router.push('/about')
-      return this.closingNav()
+      if(this.$router == '/about') {
+        console.log('not pushing')
+        return this.closingNav()
+      }
+      else {
+        this.$router.push('/about')
+        return this.closingNav()
+      }
+    },
+    orderStatus() {
+      this.displayOrderStatus = true;
+    },
+    shutDownStatus() {
+      return this.displayOrderStatus = false;
     }
   }
 }
@@ -148,6 +172,7 @@ body {
   align-items: center;
   margin: 20px 20px 0px 0px;
   cursor: pointer;
+  position: relative;
 }
 
 .cart-count {
@@ -159,9 +184,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0px 0px 30px 20px;
   color: white;
   font-size: 13px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
 }
 
 .main-content {

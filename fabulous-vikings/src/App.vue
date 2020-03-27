@@ -39,6 +39,10 @@ button {
   font-weight: bold;
 }
 
+p {
+  font-family: 'Work Sans';
+}
+
 #nav {
   padding: 30px;
 }
