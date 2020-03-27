@@ -8,12 +8,22 @@ export default new Vuex.Store({
     menu: [],
     cart: JSON.parse(window.localStorage.getItem('cart')) ? JSON.parse(window.localStorage.getItem('cart')) : [],
     showCart: false,
-    UUID: JSON.parse(window.localStorage.getItem('UUID')) ? JSON.parse(window.localStorage.getItem('UUID')) : '',
-    userRegistered: JSON.parse(window.localStorage.getItem('userRegistered'))
-      ? JSON.parse(window.localStorage.getItem('userRegistered'))
-      : false,
-    newOrder: { orderNr: '', eta: 0 },
-    orderHistory: { list: [], total: 0 }
+    userData: {
+      UUID: JSON.parse(window.localStorage.getItem('UUID')) ? JSON.parse(window.localStorage.getItem('UUID')) : '',
+      userRegistered: JSON.parse(window.localStorage.getItem('userRegistered'))
+        ? JSON.parse(window.localStorage.getItem('userRegistered'))
+        : false,
+      userName: JSON.parse(window.localStorage.getItem('userName'))
+        ? JSON.parse(window.localStorage.getItem('userName'))
+        : '',
+      userEmail: JSON.parse(window.localStorage.getItem('userEmail'))
+        ? JSON.parse(window.localStorage.getItem('userEmail'))
+        : '',
+      gdpr: 0
+    },
+
+    newOrder: { orderNr: '', eta: 0 }, //till orderstatus här ska datan hämtas
+    orderHistory: { list: [], total: 0 } //till orderhistory
   },
   getters: {
     cartTotal(state) {
@@ -29,6 +39,10 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    setUserData({ userData }, user) {
+      userData.userName = user.userName
+      userData.userEmail = user.userEmail
+    },
     loadMenu(state, menu) {
       state.menu = menu
     },
@@ -54,23 +68,57 @@ export default new Vuex.Store({
       }
     },
     newOrder(state, apiRes) {
-      if (!state.UUID) {
-        state.UUID = apiRes.UUID
+      console.log('order', apiRes)
+      if (!state.userData.UUID) {
+        state.userData.UUID = apiRes.UUID
         window.localStorage.setItem('UUID', JSON.stringify(state.UUID))
       }
-      if (!state.userRegistered && apiRes.userRegistered) {
-        state.userRegistered = true
+      if (!state.userData.userRegistered && apiRes.userRegistered) {
+        state.userData.userRegistered = true
         window.localStorage.setItem('userRegistered', JSON.stringify(true))
       }
       state.newOrder.orderNr = apiRes.orderNr
       state.newOrder.eta = apiRes.eta
       state.cart = []
       window.localStorage.setItem('cart', JSON.stringify(state.cart))
+    },
+    saveUser({ userData }, resApi) {
+      if (!userData.UUID) {
+        userData.UUID = resApi.UUID
+        window.localStorage.setItem('UUID', JSON.stringify(resApi.UUID))
+      }
+      userData.userRegistered = true
+      window.localStorage.setItem('userRegistered', JSON.stringify(true))
+      // userData.userName = resApi.userName
+      window.localStorage.setItem('userName', JSON.stringify(resApi.userName))
+      // userData.userEmail = resApi.userEmail
+      window.localStorage.setItem('userEmail', JSON.stringify(resApi.userEmail))
+    },
+    orderHistory(state, apiRes) {
+      state.orderHistory = {}
+      state.orderHistory = { list: apiRes.orders, total: apiRes.totalOrders }
     }
   },
   actions: {
-    async loadMenu(ctx) {
-      ctx.commit(
+    async signIn({ commit, state }) {
+      if (!state.userData.userName || !state.userData.userEmail)
+        throw { status: 400, message: 'user Name and Email are mandatory' }
+
+      const result = await fetch('http://localhost:5000/api/beans/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(state.userData)
+      })
+        .then(data => data.json())
+        .then(res => JSON.parse(JSON.stringify(res)))
+      // console.log('fetchresult', result)
+      if (result.status === 200) commit('saveUser', result)
+      else throw { status: result.status, message: result.message }
+    },
+    async loadMenu({ commit }) {
+      commit(
         'loadMenu',
         await fetch('http://localhost:5000/api/beans/', { method: 'GET' })
           .then(data => data.json())
@@ -84,7 +132,7 @@ export default new Vuex.Store({
         headers: {
           'Content-Type': 'application/json;charset=utf-8'
         },
-        body: JSON.stringify({ UUID: state.UUID, items: state.cart })
+        body: JSON.stringify({ UUID: state.userData.UUID, items: state.cart })
       })
         .then(data => data.json())
         .then(res => JSON.parse(JSON.stringify(res)))
@@ -92,11 +140,22 @@ export default new Vuex.Store({
       if (result.status === 200) commit('newOrder', result)
       else throw { status: result.status, message: result.message }
     },
-    addToCart(ctx, item) {
-      ctx.commit('addToCart', item)
+    async loadOrderHistory({ commit, state }) {
+      const result = await fetch('http://localhost:5000/api/beans/orderhistory/' + state.userData.UUID, {
+        method: 'GET'
+      })
+        .then(data => data.json())
+        .then(res => JSON.parse(JSON.stringify(res)))
+      if (result.status === 200) {
+        commit('orderHistory', result)
+        console.log('fetchresult', result)
+      } else throw { status: result.status, message: result.message }
     },
-    changeItemQty(ctx, obj) {
-      ctx.commit('changeItemQty', obj)
+    addToCart({ commit }, item) {
+      commit('addToCart', item)
+    },
+    changeItemQty({ commit }, obj) {
+      commit('changeItemQty', obj)
     }
   },
   modules: {}

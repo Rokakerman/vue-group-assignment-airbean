@@ -59,16 +59,52 @@ router.get('/key', (req, res) => {
   res.send(JSON.stringify(key))
 })
 
-router.post('/orderhistory', (req, res) => {
-  req.body.uuid
+router.post('/signin', (req, res) => {
   if (
-    !Object.prototype.hasOwnProperty.call(req.body, 'uuid') ||
-    !req.body.uuid.length
+    !Object.prototype.hasOwnProperty.call(req.body, 'userName') ||
+    !req.body.userName.length
+  )
+    return res.send({ status: 400, message: 'Bad request. Missing userName' })
+
+  if (
+    !Object.prototype.hasOwnProperty.call(req.body, 'userEmail') ||
+    !req.body.userEmail.length
+  )
+    return res.send({ status: 400, message: 'Bad request. Missing userEmail' })
+
+  const user = {
+    uuid: '',
+    userName: '',
+    userEmail: '',
+    gdpr: 0,
+    status: 200
+  }
+
+  if (
+    !Object.prototype.hasOwnProperty.call(req.body, 'UUID') ||
+    !req.body.UUID.length
+  )
+    user.uuid = uuid()
+  else user.uuid = req.body.UUID
+
+  user.userName = req.body.userName
+  user.userEmail = req.body.userEmail
+  user.gdpr = req.body.gdpr
+  db.saveUser(user)
+
+  res.send(JSON.stringify(user))
+})
+
+router.get('/orderhistory/:uuid', (req, res) => {
+  if (
+    !Object.prototype.hasOwnProperty.call(req.params, 'uuid') ||
+    !req.params.uuid.length
   ) {
     return res.send({ status: 400, message: 'Bad request. Missing uuid' })
   }
-
-  res.send(JSON.stringify(key))
+  const order = db.getOrdersByUser(req.params.uuid)
+  order.status = 200
+  res.send(JSON.stringify(order))
 })
 
 module.exports = router

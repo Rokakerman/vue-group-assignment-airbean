@@ -22,18 +22,25 @@ export default {
   data() {
     return {}
   },
+
   methods: {
     closeNav() {
       return this.$emit('closeNav')
     },
     showMenu() {
-      return this.$emit('showMenu')
+      //   return this.$emit('showMenu')
+      if (this.$route.path !== '/menu') this.$router.push('/menu')
+      this.$emit('closeNav')
     },
     showAbout() {
-      return this.$emit('showAbout')
+      //   return this.$emit('showAbout')
+
+      if (this.$route.path !== '/about') this.$router.push('/about')
+      this.$emit('closeNav')
     },
     showOrderStatus() {
-      return this.$emit('showOrderStatus')
+      //   return this.$emit('showOrderStatus')
+      this.$router.push('/status')
     },
     showProfile() {
       /*if('user exists') {

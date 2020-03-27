@@ -39,6 +39,7 @@ export default {}
 .about {
   max-width: 80%;
 }
+
 .about-title {
   text-align: start;
   /* font-size: 38px; */

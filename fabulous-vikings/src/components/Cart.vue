@@ -70,7 +70,6 @@ export default {
         el: element,
         qty: qty
       })
-      console.log(this.$route)
     },
     async sendOrder() {
       this.loading = true
@@ -80,8 +79,22 @@ export default {
         this.error = e.status + ' - ' + e.message
       }
       this.loading = false
-
-      // this.$emit(displayOrderStatus)
+      this.$router.push('status')
+    },
+    async signIn() {
+      this.$store.commit('setUserData', { userName: 'Pippo Franco', userEmail: 'asd@asd.it' })
+      try {
+        await this.$store.dispatch('signIn')
+      } catch (e) {
+        console.log('error', e.message)
+      }
+    },
+    async orderHistory() {
+      try {
+        await this.$store.dispatch('loadOrderHistory')
+      } catch (e) {
+        console.log('error', e.message)
+      }
     }
   },
   computed: {
@@ -105,6 +118,9 @@ export default {
   },
   created() {
     this.tweenedTotal = this.total
+  },
+  destroyed() {
+    this.$store.commit('showCart', false)
   }
 }
 </script>

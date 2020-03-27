@@ -1,11 +1,10 @@
 <template>
   <div class="main-view">
-    <Navigation
-      v-on:closeNav="closingNav"
-      v-on:showMenu="displayMenu"
-      v-on:showAbout="displayAbout"
-      v-if="displayNav == true"
-    />
+    <Navigation v-on:closeNav="closingNav" v-if="displayNav == true" />
+    <!-- v-on:showMenu="displayMenu" -->
+    <!-- v-on:showAbout="displayAbout" -->
+    <!-- v-on:showOrderStatus="orderStatus" -->
+    <!-- <Order v-if="displayOrderStatus === true" v-on:closeOrderStatus="shutDownStatus" /> -->
     <header class="main-header">
       <div class="header-icon-wrapper-left">
         <figure v-on:click="showNav" class="navicon">
@@ -15,6 +14,9 @@
       <div class="header-icon-wrapper-right">
         <figure @click="$store.commit('showCart')" v-if="!view" class="carticon">
           <img src="/assets/graphics/bag.svg" />
+          <div class="cart-count">
+            <p>{{ cartCount }}</p>
+          </div>
         </figure>
       </div>
     </header>
@@ -30,6 +32,7 @@
 import about from '../components/About'
 import menu from '../components/Menu'
 import navigation from '../components/Navigation'
+// import orderstatus from '../components/OrderStatus'
 
 export default {
   components: {
@@ -45,12 +48,17 @@ export default {
       displayNav: false
     }
   },
+  computed: {
+    cartCount() {
+      return this.$store.getters.cartTotal[0]
+    }
+  },
   methods: {
     showNav() {
       return (this.displayNav = true)
     },
     closingNav() {
-      return (this.displayNav = false)
+      this.displayNav = false
     },
     displayMenu() {
       this.$router.push('/menu')
@@ -94,7 +102,7 @@ body {
 .main-header {
   position: relative;
   overflow: hidden;
-  border: solid black 1px;
+  border: none;
   height: 15%;
   display: flex;
 }
@@ -125,6 +133,7 @@ body {
   justify-content: center;
   align-items: center;
   margin: 20px 0px 0px 20px;
+  cursor: pointer;
 }
 
 .carticon {
@@ -138,16 +147,30 @@ body {
   justify-content: center;
   align-items: center;
   margin: 20px 20px 0px 0px;
+  cursor: pointer;
+}
+
+.cart-count {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--bean-orange);
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 0px 30px 20px;
+  color: white;
+  font-size: 13px;
 }
 
 .main-content {
   background-image: url('/assets/graphics/graphics-footer2.svg');
   background-position: bottom;
   background-repeat: no-repeat;
-  background-color: #f3e4e1;
+  background-color: var(--bean-pink);
   background-size: auto 800px;
-  border: solid red 1px;
-  min-height: 84%;
+  min-height: 85%;
   display: flex;
   flex-direction: column;
   align-items: center;

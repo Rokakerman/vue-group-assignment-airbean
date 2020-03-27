@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="menu-cont">
     <Cart v-if="$store.state.showCart" />
     <header class="header">
       <h1 class="title">Meny</h1>
@@ -29,8 +29,31 @@ export default {
 </script>
 
 <style scoped>
+.menu-cont {
+  box-sizing: border-box;
+  max-height: 70vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 .title {
   font-size: 2rem;
   text-align: center;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #ebebeb;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  background: rgba(47, 41, 38, 0.541);
 }
 </style>

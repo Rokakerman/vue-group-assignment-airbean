@@ -5,8 +5,6 @@ const adapter = new FileSync('./data/database.json')
 const database = lowdb(adapter)
 
 function initiateDatabase() {
-  //   console.log('init db', database.has('order').value())
-
   if (!database.has('order').value()) database.defaults({ order: [] }).write()
 }
 
@@ -39,8 +37,6 @@ function updateTotalByUuid(uuid) {
     .find({ UUID: uuid })
     .value()
 
-  // console.log('updtotals', orders)
-
   database
     .get('order')
     .find({ UUID: uuid })
@@ -61,7 +57,6 @@ function saveOrder(uuid, orderNr, orderObj) {
       .find({ UUID: uuid })
       .value()
   ) {
-    // console.log('here')
     pushToOrder({
       UUID: uuid,
       orders: [],
@@ -69,17 +64,7 @@ function saveOrder(uuid, orderNr, orderObj) {
       userName: '',
       userEmail: ''
     })
-    // database
-    //   .get('order')
-    //   .push({ UUID: uuid, orders: [], userName: '', userEmail: '' })
-    //   .write()
   }
-
-  //   const pippo = database
-  //     .get('order')
-  //     .find({ UUID: 1 })
-  //     .value()
-
   database
     .get('order')
     .find({ UUID: uuid })
@@ -94,14 +79,8 @@ function saveOrder(uuid, orderNr, orderObj) {
     .write()
 
   updateTotalByUuid(uuid)
-  //   console.log(
-  //     'user-orders',
-  //     database
-  //       .get('order')
-  //       .find({ UUID: uuid })
-  //       .value()
-  //   )
-  return database
+
+  const order = database
     .get('order')
     .find({ UUID: uuid })
     .get('orders')
@@ -109,6 +88,32 @@ function saveOrder(uuid, orderNr, orderObj) {
     .value()
 }
 
+function saveUser(user) {
+  if (
+    !database
+      .get('order')
+      .find({ UUID: user.uuid })
+      .value()
+  ) {
+    pushToOrder({
+      UUID: user.uuid,
+      orders: [],
+      totalOrders: 0,
+      userName: user.userName,
+      userEmail: user.userEmail,
+      gdpr: user.gdpr
+    })
+  } else
+    database
+      .get('order')
+      .find({ UUID: user.uuid })
+      .update('userName', n => user.userName)
+      .update('userEmail', n => user.userEmail)
+      .update('gdpr', n => user.gdpr)
+      .write()
+}
+
+exports.saveUser = saveUser
 exports.initiateDB = initiateDatabase
 exports.getOrdersByUser = getOrdersByUser
 exports.saveOrder = saveOrder
