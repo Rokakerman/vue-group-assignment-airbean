@@ -79,8 +79,7 @@ function saveOrder(uuid, orderNr, orderObj) {
     .write()
 
   updateTotalByUuid(uuid)
-
-  const order = database
+  return database
     .get('order')
     .find({ UUID: uuid })
     .get('orders')

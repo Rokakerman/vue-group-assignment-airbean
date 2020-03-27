@@ -29,8 +29,7 @@ router.post('/', async (req, res) => {
   if (UUID === '') UUID = uuid()
   const orderNr = generateOrderNr()
   const result = db.saveOrder(UUID, orderNr, req.body.items)
-  console.log('saveOrder', result)
-  //   console.log('post save')
+  // console.log('saveOrder', result)
 
   if (
     !Object.prototype.hasOwnProperty.call(result, 'items') ||
