@@ -10,7 +10,10 @@
       <!-- <figure class="drone-container">
         <img src="/assets/graphics/drone1.svg" />
       </figure> -->
-      <iframe class="drone-container" src="/assets/graphics/drone1.svg" frameborder="0"></iframe>
+      <!-- <iframe class="drone-container" src="/assets/graphics/drone1.svg" frameborder="0"></iframe> -->
+      <!-- <svg class="drone-container" v-html="require('../assets/graphics/drone1.svg')"></svg> -->
+      <!-- <div class="drone-container" v-html="require('../assets/graphics/drone1.svg')"></div> -->
+      <drone class="drone-container" />
       <h1 class="order-title">Din beställning är på väg!</h1>
       <div class="order-under-title-container">
         <h3 class="order-under-title-int">13</h3>
@@ -24,21 +27,54 @@
 </template>
 
 <script>
+import drone from '@/assets/graphics/drone1.svg'
 export default {
   data() {
     return {
       orderNumber: 3494
     }
   },
+  components: {
+    drone: drone
+  },
   mounted() {
     // console.log(this.$refs.drone.contentDocument)
-    let tl = window.gsap.timeline()
-    tl.to('.drone-container', { duration: 2, x: 100 })
+    animate()
+    function animate() {
+      let tl = window.gsap.timeline({
+        // repeat: -1
+        //   repeatDelay: 0.6
+        // onRepeat: function() {
+        //   this.x(Math.floor(Math.random() * (100 - -100 + 1) + -100))
+        // }
+      })
+      tl.to('.drone-container', 2, {
+        // repeat: 1,
+        x: 'random(100,-100)',
+        // onRepeat: () => this.x(Math.floor(Math.random() * (100 - -100 + 1) + -100))
+        onComplete: animate
+      })
+    }
+    // tl.to('.drone-container', { scale: 1 }, '0.2')
+    // tl.to('.drone-container #BlackLeft', { duration: 0.05, repeat: -1, fill: '#d4d4d4' })
+    // tl.to('.drone-container #BlackRight', { duration: 0.05, repeat: -1, fill: '#d4d4d4' }, '0.025')
+    // tl.to('.drone-container #Light2', { duration: 1, repeat: -1, ease: 'none', fill: 'rgb(57, 218, 57)' })
+    // tl.from('.drone-container', { duration: 2, repeat: 1, scale: 1.4, x: -1300 })
+
+    // tl.addLabel('spin', 3)
+    //insert a rotation tween at the "spin" label (you could also define the insertion point as the time instead of a label)
+    // tl.to('.drone-container', { duration: 2, scale: 'random(1, 1.2)', rotation: 'random(-5,5)' }, 'spin')
+    //go to the "spin" label and play the timeline from there
+    // tl.play('spin')
+    // tl.to('.drone-container', { duration: 2, repeat: -1, yoyo: true, scale: 1.5, x: 'random(100,-100)' })
   }
 }
 </script>
 
 <style>
+.drone-container {
+  transform: scale(1.5);
+}
 .order-body {
   background-color: var(--bean-orange);
   position: fixed;
