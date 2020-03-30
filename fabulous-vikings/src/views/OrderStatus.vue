@@ -1,8 +1,8 @@
 <template>
-  <div class="order-body">
+  <div class="order-body" v-bind:class="{'no-order-body': orderNa}">
     <header class="order-header">
       <div class="order-number-container">
-        <p class="order-number">Ordernummer</p>
+        <p class="order-number"> {{orderNrTitle}} </p>
         <p class="order-number-id">{{ orderNumber }}</p>
       </div>
     </header>
@@ -10,15 +10,15 @@
       <!-- <figure class="drone-container">
         <img src="/assets/graphics/drone1.svg" />
       </figure> -->
-      <iframe class="drone-container" src="/assets/graphics/drone1.svg" frameborder="0"></iframe>
-      <h1 class="order-title">Din beställning är på väg!</h1>
+      <iframe class="drone-container" v-bind:class="{'drone-container-order': !orderNa}" src="/assets/graphics/drone1.svg" frameborder="0"></iframe>
+      <h1 class="order-title"> {{orderTitle}} </h1>
       <div class="order-under-title-container">
-        <h3 class="order-under-title-int">13</h3>
-        <h3 class="order-under-title-string">minuter</h3>
+        <h3 class="order-under-title-int"> {{ETA}} </h3>
+        <h3 class="order-under-title-string"> {{ETAMinuter}} </h3>
       </div>
     </main>
     <footer class="order-footer">
-      <button class="confirm" v-on:click="$router.push('menu')">Ok, cool!</button>
+      <button class="confirm" v-on:click="$router.push('menu')"> {{button}} </button>
     </footer>
   </div>
 </template>
@@ -27,14 +27,47 @@
 export default {
   data() {
     return {
-      orderNumber: 3494
+      orderNumber: this.$store.state.newOrder.orderNr,
+      orderNa: false,
+      orderNrTitle: 'Ordernummer',
+      orderNr: '',
+      orderTitle: 'Din beställning är på väg!',
+      ETA: this.$store.state.newOrder.eta,
+      ETAMinuter: '',
+      button: ''
     }
+  },
+  methods: {
+    checkOrder() {
+      if (this.$store.state.newOrder.orderNr.length == 0) {
+        console.log('Testing: ', this.$store.state.newOrder.orderNr)
+        this.orderNa = true
+        this.orderNrTitle = 'Inget att visa!'
+        this.orderTitle = 'Det finns inget köp att visa'
+        this.ETA = ''
+        this.button = 'Take me back'
+        return
+      }
+        this.orderNa = false
+        this.orderNr = this.$store.state.newOrder.orderNr
+        this.orderNrTitle = 'Ordernummer'
+        this.orderTitle = 'Din beställning är på väg!'
+        /*if (this.ETA == 0) {
+          this.ETA = Math.floor(Math.random()* 10)
+          console.log('here')
+        }*/
+        this.ETA = this.$store.state.newOrder.eta
+        this.ETAMinuter = 'Minuter'
+        this.button = 'Ok, cool!'
+        return 
+    },
   },
   mounted() {
     // console.log(this.$refs.drone.contentDocument)
-    let tl = window.gsap.timeline()
-    tl.to('.drone-container', { duration: 2, x: 100 })
-  }
+    //let tl = window.gsap.timeline()
+    //tl.to('.drone-container', { duration: 2, x: 100 })
+    this.checkOrder()
+  },
 }
 </script>
 
@@ -50,6 +83,10 @@ export default {
   justify-content: center;
   align-items: center;
   z-index: 2;
+}
+
+.no-order-body {
+  background-color: rgb(221, 94, 68);
 }
 
 .order-header {
@@ -88,11 +125,30 @@ export default {
 
 .drone-container {
   margin-top: -100px;
+  position: relative;
+  left: 45px;
+}
+
+.drone-container-order {
+  animation: drone 4s infinite, drone-y 1s infinite;
+  left: 0px
+}
+
+@keyframes drone {
+  0%  {left: 0px;}
+  50% {left: 90px;}
+  100% {left: 0px;}
+}
+
+@keyframes drone-y {
+  0% {top: 0px;}
+  50% {top: 15px;}
+  100% {top: 0px}
 }
 
 .order-title {
   margin-bottom: 0px;
-  font-size: 40px;
+  font-size: 38px;
   color: white;
 }
 

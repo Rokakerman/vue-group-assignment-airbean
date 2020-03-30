@@ -36,14 +36,12 @@
 import about from '../components/About'
 import menu from '../components/Menu'
 import navigation from '../components/Navigation'
-import orderstatus from '../components/OrderStatus'
 
 export default {
   components: {
     About: about,
     Menu: menu,
-    Navigation: navigation,
-    Order: orderstatus
+    Navigation: navigation
   },
   props: {
     view: Boolean

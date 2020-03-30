@@ -2,8 +2,8 @@
     <div class="user-body">
         <header class="user-header">
             <figure class="avatar-frame"></figure>
-            <h1 class="user-name"> Karl Magnussen </h1>
-            <p class="user-email"> kalle1992@outlook.com </p>
+            <h1 class="user-name"> {{$store.state.userData.userName}} </h1>
+            <p class="user-email"> {{$store.state.userData.userEmail}} </p>
         </header>
         <main class="user-main">
             <h1 class="user-order-title"> Orderhistorik </h1>

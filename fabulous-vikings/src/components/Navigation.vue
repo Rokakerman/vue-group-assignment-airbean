@@ -20,7 +20,9 @@
 <script>
 export default {
   data() {
-    return {}
+    return {
+      orderNa: false
+    }
   },
 
   methods: {
@@ -40,6 +42,12 @@ export default {
     },
     showOrderStatus() {
       //   return this.$emit('showOrderStatus')
+      /*if (this.$store.state.newOrder.orderNr.length == 0) {
+        console.log('Testing: ', this.$store.state.newOrder.orderNr)
+        this.orderNa = true
+        setTimeout(this.removeMe, 5000)
+        return 
+      }*/
       this.$router.push('/status')
     },
     showProfile() {
@@ -47,6 +55,11 @@ export default {
         if (this.$route.path !== '/profile') this.$router.push('/profile')
       } else if (this.$route.path !== '/sign') this.$router.push('/sign')
       this.$emit('closeNav')
+    },
+    removeMe() {
+      console.log('Here')
+      return this.orderNa = false
+      
     }
   }
 }
@@ -103,5 +116,10 @@ export default {
   margin-bottom: 0px;
   font-size: 40px;
   cursor: pointer;
+}
+
+.nav-option-na {
+  color: red;
+  text-shadow: black 2px;
 }
 </style>

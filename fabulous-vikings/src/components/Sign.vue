@@ -16,7 +16,7 @@
       <input type="text" v-model="UserEmail" class="sign-input" placeholder="This Email!" />
       <label class="gdpr">
         <input type="checkbox" id="checkbox" v-model="gdprOk" class="gdpr-checkmark" />
-        <p class="gdpr-bread">GPDPR Ok!</p>
+        <p class="gdpr-bread">GDPR Ok!</p>
       </label>
     </main>
     <footer class="sign-footer">
@@ -40,7 +40,7 @@ export default {
         let obj = {
           userName: this.UserName,
           userEmail: this.UserEmail,
-          gpdr: this.gdprOk
+          gdpr: this.gdprOk
         }
         this.$store.commit('setUserData', obj)
         try {
@@ -48,7 +48,8 @@ export default {
         } catch (e) {
           console.log('error', e.message)
         }
-        return console.log('valid', obj)
+        console.log('valid', obj)
+        return this.$router.push('/profile')
       } else {
         return console.log('not valid')
       }

@@ -72,7 +72,7 @@ export default new Vuex.Store({
       console.log('order', apiRes)
       if (!state.userData.UUID) {
         state.userData.UUID = apiRes.UUID
-        window.localStorage.setItem('UUID', JSON.stringify(state.UUID))
+        window.localStorage.setItem('UUID', JSON.stringify(state.userData.UUID))
       }
       if (!state.userData.userRegistered && apiRes.userRegistered) {
         state.userData.userRegistered = true
