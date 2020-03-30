@@ -44,9 +44,9 @@ export default {
         }
         this.$store.commit('setUserData', obj)
         try {
-        await this.$store.dispatch('signIn')
+          await this.$store.dispatch('signIn')
         } catch (e) {
-        console.log('error', e.message)
+          console.log('error', e.message)
         }
         return console.log('valid', obj)
       } else {

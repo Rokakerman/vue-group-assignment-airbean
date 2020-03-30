@@ -46,8 +46,17 @@ export default {
     user() {
       return this.$store.state.user
     },
-    created() {
-      return this.$store.dispatch('checkUser')
+    currentView() {
+      return this.$route.path
+    }
+  },
+  created() {
+    // this.$store.dispatch('checkUser')
+  },
+  watch: {
+    currentView(newVal) {
+      if (this.$store.state.userData.userRegistered && newVal === '/sign') this.$router.push('/profile')
+      else if (!this.$store.state.userData.userRegistered && newVal === '/profile') this.$router.push('/sign')
     }
   },
   methods: {

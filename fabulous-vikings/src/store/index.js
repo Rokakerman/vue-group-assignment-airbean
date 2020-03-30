@@ -42,6 +42,7 @@ export default new Vuex.Store({
     setUserData({ userData }, user) {
       userData.userName = user.userName
       userData.userEmail = user.userEmail
+      userData.gdpr = user.gdpr
     },
     loadMenu(state, menu) {
       state.menu = menu

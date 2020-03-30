@@ -7,9 +7,10 @@
       </div>
     </header>
     <main class="order-main">
-      <figure class="drone-container">
-        <img src="/assets/graphics/drone.svg" />
-      </figure>
+      <!-- <figure class="drone-container">
+        <img src="/assets/graphics/drone1.svg" />
+      </figure> -->
+      <iframe class="drone-container" src="/assets/graphics/drone1.svg" frameborder="0"></iframe>
       <h1 class="order-title">Din beställning är på väg!</h1>
       <div class="order-under-title-container">
         <h3 class="order-under-title-int">13</h3>
@@ -28,6 +29,11 @@ export default {
     return {
       orderNumber: 3494
     }
+  },
+  mounted() {
+    // console.log(this.$refs.drone.contentDocument)
+    let tl = window.gsap.timeline()
+    tl.to('.drone-container', { duration: 2, x: 100 })
   }
 }
 </script>

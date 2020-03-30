@@ -71,6 +71,7 @@ function saveOrder(uuid, orderNr, orderObj) {
     .get('orders')
     .push({
       orderNr: orderNr,
+      date: new Date(),
       total: orderObj.reduce((total, el) => {
         return (total += el.price * el.qty)
       }, 0),
@@ -91,11 +92,11 @@ function saveUser(user) {
   if (
     !database
       .get('order')
-      .find({ UUID: user.uuid })
+      .find({ UUID: user.UUID })
       .value()
   ) {
     pushToOrder({
-      UUID: user.uuid,
+      UUID: user.UUID,
       orders: [],
       totalOrders: 0,
       userName: user.userName,
@@ -105,7 +106,7 @@ function saveUser(user) {
   } else
     database
       .get('order')
-      .find({ UUID: user.uuid })
+      .find({ UUID: user.UUID })
       .update('userName', n => user.userName)
       .update('userEmail', n => user.userEmail)
       .update('gdpr', n => user.gdpr)

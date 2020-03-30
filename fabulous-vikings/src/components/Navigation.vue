@@ -43,11 +43,9 @@ export default {
       this.$router.push('/status')
     },
     showProfile() {
-      if(this.$store.state.userData.userRegistered) {
+      if (this.$store.state.userData.userRegistered) {
         if (this.$route.path !== '/profile') this.$router.push('/profile')
-            }
-      else 
-      if (this.$route.path !== '/sign') this.$router.push('/sign')
+      } else if (this.$route.path !== '/sign') this.$router.push('/sign')
       this.$emit('closeNav')
     }
   }
