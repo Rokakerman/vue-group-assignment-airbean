@@ -9,8 +9,7 @@
    version="1.1"
    fill="none"
    viewBox="0 0 217 120"
-   height="120"
-   width="217">
+>
   <metadata
      id="metadata4760">
     <rdf:RDF>
@@ -26,7 +25,7 @@
   <defs
      id="defs4758" />
 <style> 
-.cup {
+#Cup {
   fill="#E1E1E1";
 }
 
