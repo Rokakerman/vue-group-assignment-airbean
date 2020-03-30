@@ -1,8 +1,8 @@
 <template>
-  <div class="order-body" v-bind:class="{'no-order-body': orderNa}">
+  <div class="order-body" v-bind:class="{ 'no-order-body': orderNa }">
     <header class="order-header">
       <div class="order-number-container">
-        <p class="order-number"> {{orderNrTitle}} </p>
+        <p class="order-number">{{ orderNrTitle }}</p>
         <p class="order-number-id">{{ orderNumber }}</p>
       </div>
     </header>
@@ -10,20 +10,29 @@
       <!-- <figure class="drone-container">
         <img src="/assets/graphics/drone1.svg" />
       </figure> -->
-      <iframe class="drone-container" v-bind:class="{'drone-container-order': !orderNa}" src="/assets/graphics/drone1.svg" frameborder="0"></iframe>
-      <h1 class="order-title"> {{orderTitle}} </h1>
+      <!-- <iframe
+        class="drone-container"
+        v-bind:class="{ 'drone-container-order': !orderNa }"
+        src="/assets/graphics/drone1.svg"
+        frameborder="0"
+      ></iframe> -->
+      <div class="drone-wrapper">
+        <drone class="drone-container" v-bind:class="{ 'drone-container-order': !orderNa }" />
+      </div>
+      <h1 class="order-title">{{ orderTitle }}</h1>
       <div class="order-under-title-container">
-        <h3 class="order-under-title-int"> {{ETA}} </h3>
-        <h3 class="order-under-title-string"> {{ETAMinuter}} </h3>
+        <h3 class="order-under-title-int">{{ ETA }}</h3>
+        <h3 class="order-under-title-string">{{ ETAMinuter }}</h3>
       </div>
     </main>
     <footer class="order-footer">
-      <button class="confirm" v-on:click="$router.push('menu')"> {{button}} </button>
+      <button class="confirm" v-on:click="$router.push('menu')">{{ button }}</button>
     </footer>
   </div>
 </template>
 
 <script>
+import drone from '@/assets/graphics/drone1.svg'
 export default {
   data() {
     return {
@@ -37,6 +46,9 @@ export default {
       button: ''
     }
   },
+  components: {
+    drone
+  },
   methods: {
     checkOrder() {
       if (this.$store.state.newOrder.orderNr.length == 0) {
@@ -48,26 +60,26 @@ export default {
         this.button = 'Take me back'
         return
       }
-        this.orderNa = false
-        this.orderNr = this.$store.state.newOrder.orderNr
-        this.orderNrTitle = 'Ordernummer'
-        this.orderTitle = 'Din beställning är på väg!'
-        /*if (this.ETA == 0) {
+      this.orderNa = false
+      this.orderNr = this.$store.state.newOrder.orderNr
+      this.orderNrTitle = 'Ordernummer'
+      this.orderTitle = 'Din beställning är på väg!'
+      /*if (this.ETA == 0) {
           this.ETA = Math.floor(Math.random()* 10)
           console.log('here')
         }*/
-        this.ETA = this.$store.state.newOrder.eta
-        this.ETAMinuter = 'Minuter'
-        this.button = 'Ok, cool!'
-        return 
-    },
+      this.ETA = this.$store.state.newOrder.eta
+      this.ETAMinuter = 'Minuter'
+      this.button = 'Ok, cool!'
+      return
+    }
   },
   mounted() {
     // console.log(this.$refs.drone.contentDocument)
     //let tl = window.gsap.timeline()
     //tl.to('.drone-container', { duration: 2, x: 100 })
     this.checkOrder()
-  },
+  }
 }
 </script>
 
@@ -123,27 +135,102 @@ export default {
   align-items: center;
 }
 
+.drone-wrapper {
+  width: 80vw;
+  max-width: 400px;
+}
+
 .drone-container {
   margin-top: -100px;
   position: relative;
-  left: 45px;
+}
+
+#Cup {
+  fill: wheat;
+  /* drone1 
+  217
+120 
+   height="120"
+   width="217"
+*/
+}
+
+.drone-container-order #Light2 {
+  animation: light 0.9s infinite;
+}
+
+@keyframes light {
+  from {
+    fill: rgb(57, 218, 57);
+  }
+  to {
+    fill: black;
+  }
 }
 
 .drone-container-order {
-  animation: drone 4s infinite, drone-y 1s infinite;
-  left: 0px
+  animation: drone 3s infinite, drone-y 2s infinite, drone-r 2s infinite;
+  left: 0px;
 }
 
 @keyframes drone {
-  0%  {left: 0px;}
-  50% {left: 90px;}
-  100% {left: 0px;}
+  0% {
+    left: 0px;
+  }
+  33% {
+    left: -50px;
+  }
+  66% {
+    left: 50px;
+  }
+  100% {
+    left: 0px;
+  }
 }
 
 @keyframes drone-y {
-  0% {top: 0px;}
-  50% {top: 15px;}
-  100% {top: 0px}
+  0% {
+    top: 0px;
+  }
+  50% {
+    top: 15px;
+  }
+  100% {
+    top: 0px;
+  }
+}
+
+@keyframes drone-r {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-2deg);
+  }
+  75% {
+    transform: rotate(2deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.drone-container-order #BlackLeft {
+  animation: propeller 0.07s infinite;
+}
+
+.drone-container-order #BlackRight {
+  animation: propeller 0.07s infinite;
+  animation-delay: 0.025s;
+}
+
+@keyframes propeller {
+  from {
+    fill: #d4d4d4;
+  }
+  to {
+    fill: black;
+  }
 }
 
 .order-title {
