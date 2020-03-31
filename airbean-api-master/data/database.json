@@ -1,0 +1,105 @@
+{
+  "order": [
+    {
+      "UUID": "1ec88f8e-bb09-4252-8329-ee91977315f2",
+      "orders": [
+        {
+          "orderNr": "AB1585666082321Z",
+          "date": "2020-03-31T14:48:02.322Z",
+          "total": 39,
+          "items": [
+            {
+              "id": 1,
+              "title": "Bryggkaffe",
+              "desc": "Bryggd på månadens bönor.",
+              "price": 39,
+              "qty": 1
+            }
+          ]
+        },
+        {
+          "orderNr": "AB1585666101736Z",
+          "date": "2020-03-31T14:48:21.736Z",
+          "total": 88,
+          "items": [
+            {
+              "id": 1,
+              "title": "Bryggkaffe",
+              "desc": "Bryggd på månadens bönor.",
+              "price": 39,
+              "qty": 1
+            },
+            {
+              "id": 2,
+              "title": "Caffè Doppio",
+              "desc": "Bryggd på månadens bönor.",
+              "price": 49,
+              "qty": 1
+            }
+          ]
+        },
+        {
+          "orderNr": "AB1585666107016Y",
+          "date": "2020-03-31T14:48:27.017Z",
+          "total": 93,
+          "items": [
+            {
+              "id": 5,
+              "title": "Kaffe Latte",
+              "desc": "Bryggd på månadens bönor.",
+              "price": 54,
+              "qty": 1
+            },
+            {
+              "id": 6,
+              "title": "Cortado",
+              "desc": "Bryggd på månadens bönor.",
+              "price": 39,
+              "qty": 1
+            }
+          ]
+        },
+        {
+          "orderNr": "AB1585666112575X",
+          "date": "2020-03-31T14:48:32.575Z",
+          "total": 152,
+          "items": [
+            {
+              "id": 4,
+              "title": "Latte Macchiato",
+              "desc": "Bryggd på månadens bönor.",
+              "price": 49,
+              "qty": 1
+            },
+            {
+              "id": 3,
+              "title": "Cappuccino",
+              "desc": "Bryggd på månadens bönor.",
+              "price": 49,
+              "qty": 1
+            },
+            {
+              "id": 5,
+              "title": "Kaffe Latte",
+              "desc": "Bryggd på månadens bönor.",
+              "price": 54,
+              "qty": 1
+            }
+          ]
+        }
+      ],
+      "totalOrders": 372,
+      "userName": "",
+      "userEmail": "",
+      "status": 200
+    },
+    {
+      "UUID": "3d1555a3-a852-4179-9162-4b869928b3e2",
+      "orders": [],
+      "totalOrders": 0,
+      "userName": "hsnsns",
+      "userEmail": "@",
+      "gdpr": true
+    }
+  ]
+}

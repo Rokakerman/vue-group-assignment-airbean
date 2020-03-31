@@ -32,8 +32,9 @@ export default {
 .menu-cont {
   box-sizing: border-box;
   max-height: 70vh;
-  overflow-y: auto;
   overflow-x: hidden;
+  overflow-y: scroll;
+  scrollbar-width: thin;
 }
 
 .title {
