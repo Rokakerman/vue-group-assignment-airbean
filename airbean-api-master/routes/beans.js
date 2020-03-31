@@ -81,15 +81,12 @@ router.post('/signin', (req, res) => {
   console.log(req.body.UUID)
   if (
     !Object.prototype.hasOwnProperty.call(req.body, 'UUID') ||
-    !req.body.UUID.length
-    || 
+    !req.body.UUID.length ||
     req.body.UUID != null
-  ) 
-  {
+  ) {
     user.UUID = uuid()
-  }
-  else {
-    user.UUID  = req.body.UUID
+  } else {
+    user.UUID = req.body.UUID
   }
 
   user.userName = req.body.userName
@@ -107,8 +104,10 @@ router.get('/orderhistory/:uuid', (req, res) => {
   ) {
     return res.send({ status: 400, message: 'Bad request. Missing uuid' })
   }
-  const order = db.getOrdersByUser(req.params.uuid)
-  order.status = 200
+  let order = db.getOrdersByUser(req.params.uuid)
+  if (!Object.prototype.hasOwnProperty.call(order, 'status'))
+    order = { status: 200 }
+  else order.status = 200
   res.send(JSON.stringify(order))
 })
 
