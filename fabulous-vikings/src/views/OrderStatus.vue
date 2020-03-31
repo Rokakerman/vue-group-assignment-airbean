@@ -7,22 +7,13 @@
       </div>
     </header>
     <main class="order-main">
-      <!-- <figure class="drone-container">
-        <img src="/assets/graphics/drone1.svg" />
-      </figure> -->
-      <!-- <iframe
-        class="drone-container"
-        v-bind:class="{ 'drone-container-order': !orderNa }"
-        src="/assets/graphics/drone1.svg"
-        frameborder="0"
-      ></iframe> -->
       <div class="drone-wrapper">
         <drone class="drone-container" v-bind:class="{ 'drone-container-order': !orderNa }" />
       </div>
       <h1 class="order-title">{{ orderTitle }}</h1>
       <div class="order-under-title-container">
-        <h3 class="order-under-title-int">{{ ETA }}</h3>
-        <h3 class="order-under-title-string">{{ ETAMinuter }}</h3>
+        <h3 class="order-under-title-int">{{ timeLeftToDelivery }}</h3>
+        <!-- <h3 class="order-under-title-string">{{ ETAMinuter }}</h3> -->
       </div>
     </main>
     <footer class="order-footer">
@@ -43,7 +34,9 @@ export default {
       orderTitle: 'Din beställning är på väg!',
       ETA: this.$store.state.newOrder.eta,
       ETAMinuter: '',
-      button: ''
+      button: '',
+      timeLeftToDelivery: '',
+      interval: ''
     }
   },
   components: {
@@ -72,13 +65,32 @@ export default {
       this.ETAMinuter = 'Minuter'
       this.button = 'Ok, cool!'
       return
+    },
+    checkDeliveryDate() {
+      if (this.$store.state.newOrder.orderDateTime - new Date().getTime() < 0)
+        return (this.timeLeftToDelivery = 'Time Expired')
+
+      this.interval = setInterval(() => {
+        const now = new Date().getTime()
+
+        const distance = this.$store.state.newOrder.orderDateTime - now
+
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000)
+
+        if (distance < 0) {
+          this.timeLeftToDelivery = 'Time expired'
+          clearInterval(this.interval)
+        } else this.timeLeftToDelivery = `${minutes} minuter  ${seconds} s `
+      }, 1000)
     }
   },
   mounted() {
-    // console.log(this.$refs.drone.contentDocument)
-    //let tl = window.gsap.timeline()
-    //tl.to('.drone-container', { duration: 2, x: 100 })
     this.checkOrder()
+    this.checkDeliveryDate()
+  },
+  destroyed() {
+    if (this.interval) clearInterval(this.interval)
   }
 }
 </script>
@@ -249,6 +261,7 @@ export default {
 
 .order-under-title-int {
   font-weight: bolder;
+  white-space: nowrap;
 }
 
 .order-under-title-string {

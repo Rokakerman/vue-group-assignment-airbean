@@ -22,7 +22,9 @@ export default new Vuex.Store({
       gdpr: 0
     },
 
-    newOrder: { orderNr: '', eta: 0 }, //till orderstatus här ska datan hämtas
+    newOrder: JSON.parse(window.localStorage.getItem('newOrder'))
+      ? JSON.parse(window.localStorage.getItem('newOrder'))
+      : { orderNr: '', eta: 0, orderDateTime: '' }, //till orderstatus här ska datan hämtas
     orderHistory: { list: [], total: 0 } //till orderhistory
   },
   getters: {
@@ -83,6 +85,8 @@ export default new Vuex.Store({
       state.newOrder.eta = apiRes.eta
       state.cart = []
       window.localStorage.setItem('cart', JSON.stringify(state.cart))
+      state.newOrder.orderDateTime = new Date().getTime() + Number(apiRes.eta) * 60000
+      window.localStorage.setItem('newOrder', JSON.stringify(state.newOrder))
     },
     saveUser(state, resApi) {
       if (state.userData.UUID == null || !state.userData.UUID) {
@@ -138,7 +142,6 @@ export default new Vuex.Store({
       })
         .then(data => data.json())
         .then(res => JSON.parse(JSON.stringify(res)))
-      // console.log('fetchresult', result)
       if (result.status === 200) commit('newOrder', result)
       else throw { status: result.status, message: result.message }
     },
@@ -150,7 +153,7 @@ export default new Vuex.Store({
         .then(res => JSON.parse(JSON.stringify(res)))
       if (result.status === 200) {
         commit('orderHistory', result)
-        console.log('fetchresult', result)
+        // console.log('fetchresult', result)
       } else throw { status: result.status, message: result.message }
     },
     addToCart({ commit }, item) {
