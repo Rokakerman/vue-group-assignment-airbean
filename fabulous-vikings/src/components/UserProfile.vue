@@ -19,7 +19,7 @@
           </div>
           <div class="order-bottom-display">
             <p class="product-flavout-text">Total ordersumma</p>
-            <p class="product-sum-total">{{ order.total }}</p>
+            <p class="product-sum-total">{{ order.total }} kr</p>
           </div>
           <hr class="product-line" />
         </li>
@@ -28,7 +28,7 @@
     </main>
     <footer class="user-footer">
       <p class="total-spent">Totalt spenderat</p>
-      <p class="total-sum">{{ total }}</p>
+      <p class="total-sum">{{ total }} kr</p>
     </footer>
   </div>
 </template>

@@ -68,7 +68,7 @@ export default {
     },
     checkDeliveryDate() {
       if (this.$store.state.newOrder.orderDateTime - new Date().getTime() < 0)
-        return (this.timeLeftToDelivery = 'Time Expired')
+        return (this.timeLeftToDelivery = '')
 
       this.interval = setInterval(() => {
         const now = new Date().getTime()
@@ -79,7 +79,7 @@ export default {
         const seconds = Math.floor((distance % (1000 * 60)) / 1000)
 
         if (distance < 0) {
-          this.timeLeftToDelivery = 'Time expired'
+          this.timeLeftToDelivery = ''
           clearInterval(this.interval)
         } else this.timeLeftToDelivery = `${minutes} minuter  ${seconds} s `
       }, 1000)
