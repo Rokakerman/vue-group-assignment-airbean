@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import drone from '@/assets/graphics/drone1.svg'
+import drone from '@/assets/graphics/drone1.svg?inline'
 export default {
   data() {
     return {
