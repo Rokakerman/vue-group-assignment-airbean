@@ -105,7 +105,8 @@ router.get('/orderhistory/:uuid', (req, res) => {
     return res.send({ status: 400, message: 'Bad request. Missing uuid' })
   }
   let order = db.getOrdersByUser(req.params.uuid)
-  if (!Object.prototype.hasOwnProperty.call(order, 'status'))
+
+  if (!Object.prototype.hasOwnProperty.call(order, 'UUID'))
     order = { status: 200 }
   else order.status = 200
   res.send(JSON.stringify(order))
