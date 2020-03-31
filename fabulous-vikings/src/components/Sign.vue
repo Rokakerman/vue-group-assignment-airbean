@@ -2,7 +2,7 @@
   <div class="sign-body">
     <header class="sign-header">
       <figure class="sign-icon">
-        <img class="letter-a" src="../assets/graphics/a.svg" />
+        <img class="letter-a" src="\assets\graphics\A.svg"/>
       </figure>
       <h1 class="sign-title">Välkommen till Airbean-familjen!</h1>
       <p class="sign-bread">

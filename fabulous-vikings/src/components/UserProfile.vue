@@ -74,7 +74,7 @@ export default {
 
 .avatar-frame {
   background-color: var(--bean-pink);
-  background-image: url('../assets/graphics/Union.svg');
+  background-image: url('/assets/graphics/avatar.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-position-y: bottom;
